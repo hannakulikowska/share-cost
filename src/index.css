@@ -5,7 +5,8 @@
   --color-dark: #DA6A00;
   --color-gray: #C8D2D1;
   --color-white: #ffffff;
-  --color-black: #282a2c;
+  --color-black: #323436;
+  --padding: 2rem;
 }
 
 * {
@@ -23,16 +24,120 @@ html {
 
 body {
   font-size: 1rem;
-  height: 100%;
+  height: inherit;
   color: var(--color-black);
   display: flex;
   align-items: start;
   justify-content: center;
-  padding: 0 2rem;
+  padding: 0 var(--padding);
 }
 
 #root {
-  padding: 2rem 0;
+  padding: var(--padding) 0;
+  height: inherit;
 }
 
+.app {
+  width: 100%;
+  height: inherit;
+  display: grid;
+  grid-template-columns: repeat(2, 34rem);
+  gap: 4rem;
+  align-items: start;
+}
 
+.button {
+  margin-left: auto;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 1.2rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: normal;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: var(--color-dark);
+}
+
+.form {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form h1 {
+  font-size: 2em;
+  text-align: center;
+  color: var(--color-black);
+  margin-bottom: 1.8rem;
+}
+
+.form ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.item {
+  min-height: max-content;
+  display: flex;
+  padding: calc(var(--padding)/2);
+  border-radius: 10px;
+  background-color: var(--color-gray);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Purchases Form */
+
+.purchases {
+  border: none;
+  border-radius: 6px;
+}
+
+.purchase-item {
+  flex-direction: column;
+  
+}
+
+.purchase-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantity, .price {
+  text-align: end;
+}
+
+/* Participant Form */
+
+.participant-item {
+  justify-content: space-between;
+}
+
+.participant-name {
+  font-weight: normal;
+  font-size: 1.4rem;
+}
+
+/* Media Queries */
+
+@media (max-width: calc(34rem * 2 + 4rem)) {
+  .app {
+    grid-template-columns: 34rem;
+    height: fit-content;
+  }
+}
