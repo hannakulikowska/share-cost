@@ -2,7 +2,7 @@
   --color-primary: #68904D;
   --color-secondary: #14471E;
   --color-accent: #EE9B01;
-  --color-dark: #DA6A00;
+  --color-dark: #e5771f;
   --color-gray: #C8D2D1;
   --color-white: #ffffff;
   --color-black: #323436;
@@ -109,13 +109,28 @@ body {
 }
 
 .purchase-item {
-  flex-direction: column;
-  
+  flex-direction: column; 
+}
+
+.purchase-item input[type="checkbox"] {
+  height: 2rem;
+  width: 2rem;
+  accent-color: #e5771f;
+  margin-right: .6rem;
 }
 
 .purchase-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+.purchase-name {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.data {
+  margin-left: auto;
 }
 
 .quantity, .price {
@@ -128,9 +143,17 @@ body {
   justify-content: space-between;
 }
 
+.participant-item input[type="checkbox"] {
+  appearance: none;
+}
+
 .participant-name {
   font-weight: normal;
   font-size: 1.4rem;
+}
+
+.participant-cost {
+  margin-left: auto;
 }
 
 /* Media Queries */

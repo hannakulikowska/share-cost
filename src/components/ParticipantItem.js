@@ -1,7 +1,11 @@
 export default function ParticipantItem() {
   return (
     <li className="item participant-item">
-      <h3 className="participant-name">Anna Bond</h3>
+      <input
+        type="checkbox"
+        className="participant-name"
+      />
+      Anna Bond
       <p className="participant-cost">0$</p>
     </li>
   );

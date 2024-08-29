@@ -2,8 +2,12 @@ export default function PurchaseItem() {
   return (
     <li className="item purchase-item">
       <div className="purchase-info">
-        <h3 className="purchase-name">Paper A4</h3>
-        <div>
+        <input
+          type="checkbox"
+          className="purchase-name"
+        />
+        Paper A4
+        <div className="data">
           <p className="quantity">2 pcs</p>
           <p className="price">4$</p>
         </div>
