@@ -47,6 +47,7 @@ body {
 
 .button {
   margin-left: auto;
+  float: right;
   background-color: var(--color-accent);
   color: var(--color-white);
   border: none;
@@ -66,10 +67,10 @@ body {
 form {
   background-color: var(--color-gray);
   border-radius: 1rem;
+  padding: 1em;
 }
 
 .form {
-  padding: 1em;
   display: flex;
   flex-direction: column;
 }
@@ -125,6 +126,15 @@ input[type="text"] {
 input[type="text"]::placeholder {
   font-size: 1.2rem;
   color: var(--color-gray);
+}
+
+/* Left column */
+
+.column{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 /* Purchases Form */
@@ -184,9 +194,7 @@ input[type="text"]::placeholder {
 
 /* Add purchase form */
 
-.add-purchase-form {
-  padding: 0 1rem;
-}
+
 
 /* Media Queries */
 

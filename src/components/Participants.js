@@ -7,7 +7,6 @@ export default function Participants() {
       <ul className="participants-list">
         <ParticipantItem />
       </ul>
-      <button className="button">Add participant</button>
     </div>
   );
 }

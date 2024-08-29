@@ -7,7 +7,6 @@ export default function Purchases() {
       <ul className="purchases-list">
         <PurchaseItem />
       </ul>
-      <button className="button">Add purchase</button>
     </div>
   );
 }
