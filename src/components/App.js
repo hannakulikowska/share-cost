@@ -4,17 +4,17 @@ import PurchaseForm from "./PurchaseForm";
 import { useState } from "react";
 
 export default function App() {
-  const [openAddPurchaseForm, setOpenAddPurchaseForm] = useState(false);
+  const [openPurchaseForm, setOpenPurchaseForm] = useState(false);
 
   const [purchaseItems, setPurchaseItems] = useState([]);
 
-  function handleOpenAddPurchaseForm() {
-    setOpenAddPurchaseForm((open) => !open);
+  function handleOpenPurchaseForm() {
+    setOpenPurchaseForm((open) => !open);
   }
 
   function handleAddPurchase(item) {
     setPurchaseItems((purchaseItems) => [...purchaseItems, item]);
-    handleOpenAddPurchaseForm();
+    handleOpenPurchaseForm();
   }
 
   return (
@@ -23,11 +23,11 @@ export default function App() {
         <Purchases purchaseItems={purchaseItems} />
         <button
           className="button"
-          onClick={handleOpenAddPurchaseForm}
+          onClick={handleOpenPurchaseForm}
         >
-          {openAddPurchaseForm ? "Close the form" : "Add purchase"}
+          {openPurchaseForm ? "Close the form" : "Add purchase"}
         </button>
-        {openAddPurchaseForm && (
+        {openPurchaseForm && (
           <PurchaseForm onAddPurchaseItem={handleAddPurchase} />
         )}
       </div>
