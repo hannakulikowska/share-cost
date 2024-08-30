@@ -1,4 +1,4 @@
-export default function PurchaseItem() {
+export default function PurchaseItem({ item }) {
   return (
     <li className="item purchase-item">
       <div className="purchase-info">
@@ -6,13 +6,16 @@ export default function PurchaseItem() {
           type="checkbox"
           className="purchase-name"
         />
-        Paper A4
+        {item.name}
+
         <div className="data">
-          <p className="quantity">2 pcs</p>
-          <p className="price">4$</p>
+          <p className="quantity">{item.quantity} pcs</p>
+          <p className="price">{item.price}$</p>
         </div>
       </div>
-      <p className="purchase-amount">Total amount: 8$</p>
+      <p className="purchase-amount">
+        Total amount: {item.quantity * item.price}$
+      </p>
     </li>
   );
 }

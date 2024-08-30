@@ -1,11 +1,16 @@
 import PurchaseItem from "./PurchaseItem";
 
-export default function Purchases() {
+export default function Purchases({ purchaseItems }) {
   return (
-    <div className="form purchases-form">
-      <h1>Purchases</h1>
-      <ul className="purchases-list">
-        <PurchaseItem />
+    <div className="purchases">
+      <h2>Purchases</h2>
+      <ul>
+        {purchaseItems.map((item) => (
+          <PurchaseItem
+            item={item}
+            key={item.id}
+          />
+        ))}
       </ul>
     </div>
   );

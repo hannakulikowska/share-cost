@@ -70,19 +70,19 @@ form {
   padding: 1em;
 }
 
-.form {
+.form, .purchases, .participants {
   display: flex;
   flex-direction: column;
 }
 
-.form h1 {
+.purchases h2, .participants h2 {
   font-size: 2em;
   text-align: center;
   color: var(--color-black);
   margin-bottom: 1.8rem;
 }
 
-.form ul {
+.purchases ul, .participants ul {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -130,7 +130,7 @@ input[type="text"]::placeholder {
 
 /* Left column */
 
-.column{
+.column {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -138,11 +138,6 @@ input[type="text"]::placeholder {
 }
 
 /* Purchases Form */
-
-.purchases {
-  border: none;
-  border-radius: 6px;
-}
 
 .purchase-item {
   flex-direction: column; 
