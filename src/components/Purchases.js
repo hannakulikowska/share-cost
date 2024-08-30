@@ -1,6 +1,10 @@
 import PurchaseItem from "./PurchaseItem";
 
-export default function Purchases({ purchaseItems }) {
+export default function Purchases({
+  purchaseItems,
+  onSelection,
+  selectedPurchase,
+}) {
   return (
     <div className="purchases">
       <h2>Purchases</h2>
@@ -9,6 +13,8 @@ export default function Purchases({ purchaseItems }) {
           <PurchaseItem
             item={item}
             key={item.id}
+            selectedItem={selectedPurchase}
+            onSelection={onSelection}
           />
         ))}
       </ul>

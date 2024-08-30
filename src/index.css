@@ -101,6 +101,7 @@ form {
   cursor: pointer;
 }
 
+.selected,
 .item:hover {
   background-color: var(--color-primary);
   color: var(--color-white);

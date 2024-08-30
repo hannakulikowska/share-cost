@@ -1,6 +1,13 @@
-export default function PurchaseItem({ item }) {
+export default function PurchaseItem({ item, onSelection, selectedItem }) {
+  const isSelected = selectedItem?.id === item.id;
+
   return (
-    <li className="item purchase-item">
+    <li
+      className={
+        isSelected ? "item purchase-item selected" : "item purchase-item"
+      }
+      onClick={() => onSelection(item)}
+    >
       <div className="purchase-info">
         <input
           type="checkbox"

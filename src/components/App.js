@@ -11,6 +11,8 @@ export default function App() {
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [participantItems, setParticipantItems] = useState([]);
 
+  const [selectedPurchase, setSelectedPurchase] = useState("");
+
   function handleOpenPurchaseForm() {
     setOpenPurchaseForm((open) => !open);
   }
@@ -29,10 +31,20 @@ export default function App() {
     handleOpenParticipantForm();
   }
 
+  function handlePurchaseSelection(item) {
+    setSelectedPurchase((cur) => (cur?.id === item.id ? null : item));
+    setOpenPurchaseForm(false);
+    // !TODO: create and implement here a function to open a form for chousing who pays for this selected purchase
+  }
+
   return (
     <div className="app">
       <div className="column">
-        <Purchases purchaseItems={purchaseItems} />
+        <Purchases
+          purchaseItems={purchaseItems}
+          onSelection={handlePurchaseSelection}
+          selectedPurchase={selectedPurchase}
+        />
         <button
           className="button"
           onClick={handleOpenPurchaseForm}
