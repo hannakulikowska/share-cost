@@ -1,11 +1,11 @@
-export default function ParticipantItem() {
+export default function ParticipantItem({ item }) {
   return (
     <li className="item participant-item">
       <input
         type="checkbox"
         className="participant-name"
       />
-      Anna Bond
+      {item.name}
       <p className="participant-cost">0$</p>
     </li>
   );
