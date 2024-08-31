@@ -11,7 +11,8 @@ export default function App() {
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [participantItems, setParticipantItems] = useState([]);
 
-  const [selectedPurchase, setSelectedPurchase] = useState("");
+  const [selectedPurchase, setSelectedPurchase] = useState(null);
+  const [selectedParticipant, setSelectedParticipant] = useState(null);
 
   function handleOpenPurchaseForm() {
     setOpenPurchaseForm((open) => !open);
@@ -37,6 +38,12 @@ export default function App() {
     // !TODO: create and implement here a function to open a form for chousing who pays for this selected purchase
   }
 
+  function handleParticipantSelection(item) {
+    setSelectedParticipant((cur) => (cur?.id === item.id ? null : item));
+    setOpenParticipantForm(false);
+    // !TODO: create and implement here a function to open a form for chousing who pays for this selected purchase
+  }
+
   return (
     <div className="app">
       <div className="column">
@@ -56,7 +63,11 @@ export default function App() {
         )}
       </div>
       <div className="column">
-        <Participants participantItems={participantItems} />
+        <Participants
+          participantItems={participantItems}
+          onSelection={handleParticipantSelection}
+          selectedParticipant={selectedParticipant}
+        />
         <button
           className="button"
           onClick={handleOpenParticipantForm}

@@ -1,6 +1,10 @@
 import ParticipantItem from "./ParticipantItem";
 
-export default function Participants({ participantItems }) {
+export default function Participants({
+  participantItems,
+  onSelection,
+  selectedParticipant,
+}) {
   return (
     <div className="participants">
       <h2>Participants</h2>
@@ -9,6 +13,8 @@ export default function Participants({ participantItems }) {
           <ParticipantItem
             item={item}
             key={item.id}
+            onSelection={onSelection}
+            selectedItem={selectedParticipant}
           />
         ))}
       </ul>
