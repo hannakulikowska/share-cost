@@ -1,28 +1,33 @@
 import { useState } from "react";
 
-export default function PurchaseForm({ onAddPurchaseItem }) {
+export default function PurchaseForm({ onAddPurchaseItem, onClose }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!name || !quantity || !price) return;
+    if (!name || !quantity) return;
 
     const newPurchaseItem = {
       name,
       quantity: Number(quantity),
-      price: Number(price),
       id: Date.now(),
     };
-
-    console.log(newPurchaseItem);
 
     onAddPurchaseItem(newPurchaseItem);
     setName("");
     setQuantity("");
-    setPrice("");
+  }
+
+  function handleQUantityChange(e) {
+    const value = parseInt(e.target.value, 10);
+
+    if (value > 0) {
+      setQuantity(value);
+    } else {
+      setQuantity("");
+    }
   }
 
   return (
@@ -55,22 +60,18 @@ export default function PurchaseForm({ onAddPurchaseItem }) {
           id="pcs"
           placeholder="Add quantity"
           value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
+          onChange={handleQUantityChange}
         />
-        <label
-          htmlFor="price"
-          className="label"
-        >
-          Price
-        </label>
-        <input
-          type="text"
-          id="price"
-          placeholder="Add price per piece"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <button className="button">Submit</button>
+        <div className="buttons">
+          <button
+            className="button"
+            style={{ marginLeft: "0" }}
+            onClick={onClose}
+          >
+            Close
+          </button>
+          <button className="button">Submit</button>
+        </div>
       </form>
     </div>
   );

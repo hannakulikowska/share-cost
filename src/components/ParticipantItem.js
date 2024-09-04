@@ -1,6 +1,8 @@
 export default function ParticipantItem({ item, onSelection, selectedItem }) {
   const isSelected = selectedItem?.id === item.id;
 
+  console.log("Rendering ParticipantItem:", item);
+
   return (
     <li
       className={
@@ -13,7 +15,7 @@ export default function ParticipantItem({ item, onSelection, selectedItem }) {
         className="participant-name"
       />
       {item.name}
-      <p className="participant-cost">0$</p>
+      <p className="participant-cost">{(item.totalPaid || 0).toFixed(2)}$</p>
     </li>
   );
 }

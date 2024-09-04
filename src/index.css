@@ -6,6 +6,7 @@
   --color-gray: #C8D2D1;
   --color-white: #ffffff;
   --color-black: #323436;
+  --color-disabled: #7f7f7f;
   --padding: 2rem;
 }
 
@@ -114,7 +115,7 @@ form {
   margin-block-end: 0.6rem;
 }
 
-input[type="text"] {
+input[type="text"], select {
   width: 100%;
   padding: 1rem;
   font-size: 1.4rem;
@@ -145,20 +146,30 @@ input[type="text"]::placeholder {
 }
 
 .purchase-item input[type="checkbox"] {
-  height: 2rem;
-  width: 2rem;
-  accent-color: #e5771f;
-  margin-right: .6rem;
+  appearance: none;
+}
+
+.purchase-item[disabled] {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray);
+  cursor: default;
+}
+
+.purchase-item[disabled] .quantity,
+.purchase-item[disabled] .price,
+.purchase-item[disabled] .purchase-amount,
+.purchase-item[disabled] .purchase-name {
+  color: var(--color-disabled);
+  font-weight: normal;
+}
+
+.purchase-item[disabled] .purchase-name {
+  text-decoration: line-through;
 }
 
 .purchase-info {
   display: flex;
   justify-content: flex-start;
-}
-
-.purchase-name {
-  font-weight: bold;
-  font-size: 1.6rem;
 }
 
 .data {
@@ -167,6 +178,10 @@ input[type="text"]::placeholder {
 
 .quantity, .price {
   text-align: end;
+}
+
+.quantity {
+  font-weight: bold;
 }
 
 /* Participant Form */
@@ -188,9 +203,12 @@ input[type="text"]::placeholder {
   margin-left: auto;
 }
 
-/* Add purchase form */
+/* Purchase forms */
 
-
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* Media Queries */
 

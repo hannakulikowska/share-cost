@@ -7,21 +7,26 @@ export default function PurchaseItem({ item, onSelection, selectedItem }) {
         isSelected ? "item purchase-item selected" : "item purchase-item"
       }
       onClick={() => onSelection(item)}
+      disabled={item.purchasedQuantity === item.quantity}
     >
       <div className="purchase-info">
         <input
           type="checkbox"
           className="purchase-name"
         />
-        {item.name}
+        <p style={{ fontWeight: "bold" }}>{item.name}</p>
 
         <div className="data">
-          <p className="quantity">{item.quantity} pcs</p>
-          <p className="price">{item.price}$</p>
+          <p className="quantity">
+            {item.purchasedQuantity}/{item.quantity} pcs
+          </p>
+          <p className="price">
+            {(item.totalPaid / item.purchasedQuantity || 0).toFixed(2)}$
+          </p>
         </div>
       </div>
       <p className="purchase-amount">
-        Total amount: {item.quantity * item.price}$
+        Total paid: {(item.totalPaid || 0).toFixed(2)}$
       </p>
     </li>
   );

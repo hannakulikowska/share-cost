@@ -2,6 +2,7 @@ import Participants from "./Participants";
 import Purchases from "./Purchases";
 import PurchaseForm from "./PurchaseForm";
 import ParticipantForm from "./ParticipantForm";
+import PurchaseSelectorForm from "./PurchaseSelectorForm";
 import { useState } from "react";
 
 export default function App() {
@@ -23,26 +24,68 @@ export default function App() {
   }
 
   function handleAddPurchase(item) {
-    setPurchaseItems((purchaseItems) => [...purchaseItems, item]);
-    handleOpenPurchaseForm();
+    const newItem = { ...item, purchasedQuantity: 0 };
+    setPurchaseItems((purchaseItems) => [...purchaseItems, newItem]);
+    handleOpenPurchaseForm(false);
   }
 
   function handleAddParticipant(item) {
     setParticipantItems((participantItems) => [...participantItems, item]);
-    handleOpenParticipantForm();
+    handleOpenParticipantForm(false);
   }
 
   function handlePurchaseSelection(item) {
     setSelectedPurchase((cur) => (cur?.id === item.id ? null : item));
     setOpenPurchaseForm(false);
-    // !TODO: create and implement here a function to open a form for chousing who pays for this selected purchase
   }
 
   function handleParticipantSelection(item) {
     setSelectedParticipant((cur) => (cur?.id === item.id ? null : item));
     setOpenParticipantForm(false);
-    // !TODO: create and implement here a function to open a form for chousing who pays for this selected purchase
+    // !TODO: create and implement here a function to open purchases' list of selected person
   }
+
+  function handleClosePurchaseSelector() {
+    setSelectedPurchase(null);
+  }
+
+  function handleQuantityPurchased(
+    itemId,
+    quantity,
+    amount,
+    payerParticipantId
+  ) {
+    setPurchaseItems((items) =>
+      items.map((item) =>
+        item.id === itemId
+          ? {
+              ...item,
+              purchasedQuantity: item.purchasedQuantity + quantity,
+              totalPaid: (item.totalPaid || 0) + amount,
+            }
+          : item
+      )
+    );
+
+    setParticipantItems((participants) =>
+      participants.map((participant) =>
+        participant.id === payerParticipantId
+          ? {
+              ...participant,
+              totalPaid: (participant.totalPaid || 0) + amount,
+            }
+          : participant
+      )
+    );
+
+    console.log("Updated Participants:", participantItems);
+
+    handleClosePurchaseSelector();
+  }
+
+  const showAddPurchaseButton =
+    (purchaseItems.length === 0 || selectedPurchase === null) &&
+    !openPurchaseForm;
 
   return (
     <div className="app">
@@ -52,14 +95,34 @@ export default function App() {
           onSelection={handlePurchaseSelection}
           selectedPurchase={selectedPurchase}
         />
-        <button
-          className="button"
-          onClick={handleOpenPurchaseForm}
-        >
-          {openPurchaseForm ? "Close the form" : "Add purchase"}
-        </button>
+        {selectedPurchase && participantItems.length > 0 && (
+          <PurchaseSelectorForm
+            onClose={handleClosePurchaseSelector}
+            onSubmit={(quantity, roundedAmount, payerParticipantId) =>
+              handleQuantityPurchased(
+                selectedPurchase.id,
+                quantity,
+                roundedAmount,
+                payerParticipantId
+              )
+            }
+            selectedPurchase={selectedPurchase}
+            participantItems={participantItems}
+          />
+        )}
         {openPurchaseForm && (
-          <PurchaseForm onAddPurchaseItem={handleAddPurchase} />
+          <PurchaseForm
+            onAddPurchaseItem={handleAddPurchase}
+            onClose={handleOpenPurchaseForm}
+          />
+        )}
+        {showAddPurchaseButton && (
+          <button
+            className="button"
+            onClick={handleOpenPurchaseForm}
+          >
+            Add purchase
+          </button>
         )}
       </div>
       <div className="column">
@@ -68,6 +131,13 @@ export default function App() {
           onSelection={handleParticipantSelection}
           selectedParticipant={selectedParticipant}
         />
+        {selectedPurchase && participantItems.length === 0 ? (
+          <p style={{ fontSize: "14px", color: "red" }}>
+            Add at least one participant
+          </p>
+        ) : (
+          ""
+        )}
         <button
           className="button"
           onClick={handleOpenParticipantForm}
