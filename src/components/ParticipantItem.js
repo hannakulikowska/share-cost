@@ -1,5 +1,23 @@
-export default function ParticipantItem({ item, onSelection, selectedItem }) {
+export default function ParticipantItem({
+  item,
+  onSelection,
+  selectedItem,
+  purchases,
+}) {
   const isSelected = selectedItem?.id === item.id;
+
+  const totalPaidByParticipant = (purchases || []).reduce((total, purchase) => {
+    const participantPurchases = (purchase.participants || []).filter(
+      (p) => p.id === item.id
+    );
+
+    const totalForThisPurchase = participantPurchases.reduce(
+      (sum, p) => sum + p.amount,
+      0
+    );
+
+    return total + totalForThisPurchase;
+  }, 0);
 
   console.log("Rendering ParticipantItem:", item);
 
@@ -15,7 +33,7 @@ export default function ParticipantItem({ item, onSelection, selectedItem }) {
         className="participant-name"
       />
       {item.name}
-      <p className="participant-cost">{(item.totalPaid || 0).toFixed(2)}$</p>
+      <p className="participant-cost">{totalPaidByParticipant.toFixed(2)}$</p>
     </li>
   );
 }

@@ -49,12 +49,7 @@ export default function App() {
     setSelectedPurchase(null);
   }
 
-  function handleQuantityPurchased(
-    itemId,
-    quantity,
-    amount,
-    payerParticipantId
-  ) {
+  function handlePurchases(itemId, quantity, amount, payerParticipantId) {
     setPurchaseItems((items) =>
       items.map((item) =>
         item.id === itemId
@@ -62,23 +57,14 @@ export default function App() {
               ...item,
               purchasedQuantity: item.purchasedQuantity + quantity,
               totalPaid: (item.totalPaid || 0) + amount,
+              participants: [
+                ...(Array.isArray(item.participants) ? item.participants : []),
+                { id: Number(payerParticipantId), amount: amount },
+              ],
             }
           : item
       )
     );
-
-    setParticipantItems((participants) =>
-      participants.map((participant) =>
-        participant.id === payerParticipantId
-          ? {
-              ...participant,
-              totalPaid: (participant.totalPaid || 0) + amount,
-            }
-          : participant
-      )
-    );
-
-    console.log("Updated Participants:", participantItems);
 
     handleClosePurchaseSelector();
   }
@@ -99,7 +85,7 @@ export default function App() {
           <PurchaseSelectorForm
             onClose={handleClosePurchaseSelector}
             onSubmit={(quantity, roundedAmount, payerParticipantId) =>
-              handleQuantityPurchased(
+              handlePurchases(
                 selectedPurchase.id,
                 quantity,
                 roundedAmount,
@@ -130,6 +116,7 @@ export default function App() {
           participantItems={participantItems}
           onSelection={handleParticipantSelection}
           selectedParticipant={selectedParticipant}
+          purchaseItems={purchaseItems}
         />
         {selectedPurchase && participantItems.length === 0 ? (
           <p style={{ fontSize: "14px", color: "red" }}>

@@ -10,11 +10,13 @@ export default function PurchaseItem({ item, onSelection, selectedItem }) {
       disabled={item.purchasedQuantity === item.quantity}
     >
       <div className="purchase-info">
-        <input
-          type="checkbox"
+        <input type="checkbox" />
+        <p
           className="purchase-name"
-        />
-        <p style={{ fontWeight: "bold" }}>{item.name}</p>
+          style={{ fontWeight: "bold" }}
+        >
+          {item.name}
+        </p>
 
         <div className="data">
           <p className="quantity">

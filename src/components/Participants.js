@@ -4,6 +4,7 @@ export default function Participants({
   participantItems,
   onSelection,
   selectedParticipant,
+  purchaseItems,
 }) {
   return (
     <div className="participants">
@@ -15,6 +16,7 @@ export default function Participants({
             key={item.id}
             onSelection={onSelection}
             selectedItem={selectedParticipant}
+            purchases={purchaseItems}
           />
         ))}
       </ul>
